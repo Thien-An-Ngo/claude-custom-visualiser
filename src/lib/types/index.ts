@@ -1,3 +1,5 @@
+import type { Component } from 'svelte';
+
 export type ProjectStatus = 'new' | 'updated' | 'stable';
 
 export interface Section {
@@ -12,7 +14,7 @@ export interface ProjectMeta {
 	tags: string[];
 	status: ProjectStatus;
 	/** Lazy-load the Visualiser component */
-	component: () => Promise<{ default: unknown }>;
+	component: () => Promise<{ default: Component }>;
 	/** Lazy-load the config JSON */
 	config: () => Promise<Project>;
 }
@@ -26,7 +28,6 @@ export interface Project {
 	sections: Section[];
 }
 
-export interface ApiResponse<T> {
-	data: T;
-	error?: string;
-}
+export type ApiResponse<T> =
+	| { data: T; error?: never }
+	| { data?: never; error: string };
