@@ -16,7 +16,7 @@ export interface ProjectMeta {
 	/** Lazy-load the Visualiser component */
 	component: () => Promise<{ default: Component }>;
 	/** Lazy-load the config JSON */
-	config: () => Promise<Project>;
+	config: () => Promise<{ default: Project }>;
 }
 
 export interface Project {

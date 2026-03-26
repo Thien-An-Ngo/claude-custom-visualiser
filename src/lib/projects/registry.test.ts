@@ -18,7 +18,7 @@ describe('registry', () => {
 		expect(typeof entry.config).toBe('function');
 	});
 
-	it('getRegistryList returns ordered array', () => {
+	it('getRegistryList returns a non-empty array', () => {
 		const list = getRegistryList();
 		expect(Array.isArray(list)).toBe(true);
 		expect(list[0].slug).toBeDefined();
