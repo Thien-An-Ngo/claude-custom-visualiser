@@ -1,9 +1,21 @@
 <script lang="ts">
 	import '../app.css';
-	import favicon from '$lib/assets/favicon.svg';
+	import GridBackground from '$lib/components/layout/GridBackground.svelte';
+	import type { Snippet } from 'svelte';
 
-	let { children } = $props();
+	let { children }: { children: Snippet } = $props();
 </script>
 
-<svelte:head><link rel="icon" href={favicon} /></svelte:head>
-{@render children()}
+<GridBackground />
+
+<div class="layout-root">
+	{@render children()}
+</div>
+
+<style>
+	.layout-root {
+		position: relative;
+		z-index: 1;
+		min-height: 100vh;
+	}
+</style>
