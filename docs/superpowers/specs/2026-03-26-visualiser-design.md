@@ -1,4 +1,5 @@
 # Visualiser — Design Spec
+
 **Date:** 2026-03-26
 **Status:** Approved
 
@@ -13,18 +14,20 @@ A Bun + SvelteKit (SPA mode) application for displaying design recommendation vi
 ## Visual Identity
 
 ### Colour Palette
-| Role | Token | Hex |
-|------|-------|-----|
-| Background | `--color-bg` | `#070707` |
-| Surface | `--color-surface` | `#0a0a0a` |
-| Border | `--color-border` | `#1a1a1a` |
-| Red (primary) | `--color-red` | `#821400` |
-| Gold (accent) | `--color-gold` | `#e6b820` |
-| Text primary | `--color-text` | `#e8e8e8` |
-| Text muted | `--color-muted` | `#666666` |
-| Text ghost | `--color-ghost` | `#333333` |
+
+| Role          | Token             | Hex       |
+| ------------- | ----------------- | --------- |
+| Background    | `--color-bg`      | `#070707` |
+| Surface       | `--color-surface` | `#0a0a0a` |
+| Border        | `--color-border`  | `#1a1a1a` |
+| Red (primary) | `--color-red`     | `#821400` |
+| Gold (accent) | `--color-gold`    | `#e6b820` |
+| Text primary  | `--color-text`    | `#e8e8e8` |
+| Text muted    | `--color-muted`   | `#666666` |
+| Text ghost    | `--color-ghost`   | `#333333` |
 
 **Rules:**
+
 - Red (`#821400`) is used exclusively for borders, glows, scanlines, grid underlays, and structural indicators — never on body text
 - Gold (`#e6b820`) is reserved for active state markers, "new" badges, and key callouts — used sparingly, never decorative
 - All readable text uses `--color-text` or `--color-muted`
@@ -33,6 +36,7 @@ A Bun + SvelteKit (SPA mode) application for displaying design recommendation vi
 - Gold elements carry a sharp glow: `0 0 8px #e6b820, 0 0 16px rgba(230,184,32,0.4)`
 
 ### Aesthetic
+
 - **Grid underlay:** repeating 32px horizontal + vertical lines at 5% red opacity on all pages
 - **Glass panels:** content cards use `background: rgba(10,10,10,0.9)`, `border: 1px solid rgba(130,20,0,0.4)`, subtle inner shadow
 - **Ambient bloom:** radial red glow behind key focal points (hero title, active elements)
@@ -44,6 +48,7 @@ A Bun + SvelteKit (SPA mode) application for displaying design recommendation vi
 ## Architecture
 
 ### Tech Stack
+
 - **Runtime:** Bun
 - **Framework:** SvelteKit in SPA mode (`adapter-static`, `ssr: false`)
 - **Component library:** shadcn-svelte (customised to the design tokens above)
@@ -51,6 +56,7 @@ A Bun + SvelteKit (SPA mode) application for displaying design recommendation vi
 - **Data:** JSON config files per project, read via a stubbed API client
 
 ### Project Structure
+
 ```
 src/
 ├── lib/
@@ -65,6 +71,7 @@ src/
 │   │       └── Visualiser.svelte
 │   ├── stores/                  ← active project, theme state
 │   ├── types/                   ← Project, Section, ApiResponse interfaces
+│   ├── animations.ts            ← all GSAP timeline definitions
 │   └── api/
 │       └── client.ts            ← getProject(slug), listProjects() — JSON now, API later
 ├── routes/
@@ -78,29 +85,32 @@ docs/
 ```
 
 ### Registry Pattern
+
 `registry.ts` is the single source of truth for all projects:
 
 ```ts
 import type { ProjectMeta } from '$lib/types';
 
 export const registry: Record<string, ProjectMeta> = {
-  'design-system': {
-    title: 'Design System',
-    tags: ['COLOR', 'TYPE', 'TOKENS'],
-    status: 'new',
-    component: () => import('./design-system/Visualiser.svelte'),
-    config: () => import('./design-system/config.json'),
-  },
+	'design-system': {
+		title: 'Design System',
+		tags: ['COLOR', 'TYPE', 'TOKENS'],
+		status: 'new',
+		component: () => import('./design-system/Visualiser.svelte'),
+		config: () => import('./design-system/config.json')
+	}
 };
 ```
 
 Adding a new project = one registry entry + one folder. The dynamic route handles the rest.
 
 ### API Seam
+
 `src/lib/api/client.ts` exposes:
+
 ```ts
-export async function listProjects(): Promise<ProjectMeta[]>
-export async function getProject(slug: string): Promise<Project>
+export async function listProjects(): Promise<ProjectMeta[]>;
+export async function getProject(slug: string): Promise<Project>;
 ```
 
 Currently backed by the registry/JSON. When an API is ready, only this file changes.
@@ -110,6 +120,7 @@ Currently backed by the registry/JSON. When an API is ready, only this file chan
 ## Pages
 
 ### Landing Page (`/`)
+
 - **No sidebar**
 - Full-bleed layout with grid underlay
 - **Hero (left 42%):** Rotated diamond sigil (◈ rotated 45°, glowing crimson from within) above the wordmark "VISUALISER" in wide-tracked caps. "BY CLAUDE" sub-label. Crimson ambient bloom behind. Vertical red divider separates hero from carousel.
@@ -117,10 +128,12 @@ Currently backed by the registry/JSON. When an API is ready, only this file chan
   - Active card: expanded — shows number, title, description, tags. Red border + glow.
   - Prev/next cards: single compressed row, 35% opacity, fading into background
   - Only prev and next are visible; others hidden
-  - GSAP animates expand/collapse on navigation (scroll or arrow keys)
+  - Navigation: arrow keys (↑/↓) or mouse wheel over the carousel region advances the selection
+  - GSAP animates expand/collapse on each navigation step
 - **Entry animation:** Sigil fades + scales in, wordmark types in letter by letter, divider slides down, carousel cards stagger up
 
 ### Project Page (`/projects/[slug]`)
+
 - **Icon sidebar (left):** Narrow rail with numbered project icons. Expands on hover to reveal names. Active project glows red. GSAP slides sidebar in from left on route entry.
 - **Topbar:** Project name (red monospace label) + gold status indicator
 - **Content area:** Mounts the project's `Visualiser.svelte` component. Content fades + translates up on entry via GSAP.
@@ -131,34 +144,35 @@ Currently backed by the registry/JSON. When an API is ready, only this file chan
 ## Data Shape
 
 ### `config.json` (per project)
+
 ```json
 {
-  "slug": "design-system",
-  "title": "Design System",
-  "description": "Color palette, typography scale, spacing tokens",
-  "tags": ["COLOR", "TYPE", "TOKENS"],
-  "status": "new",
-  "sections": [
-    { "type": "colour-palette", "data": {} },
-    { "type": "type-scale", "data": {} }
-  ]
+	"slug": "design-system",
+	"title": "Design System",
+	"description": "Color palette, typography scale, spacing tokens",
+	"tags": ["COLOR", "TYPE", "TOKENS"],
+	"status": "new",
+	"sections": [
+		{ "type": "colour-palette", "data": {} },
+		{ "type": "type-scale", "data": {} }
+	]
 }
 ```
 
-`sections[].type` maps to a registered visualisation component in `src/lib/components/visualisations/`.
+`sections[].type` maps to a registered visualisation component in `src/lib/components/visualisations/`. The shape of `sections[].data` is defined per visualisation type — each component owns and documents its own data contract. The first project (`design-system`) will define these contracts as it is built.
 
 ---
 
 ## Animation Strategy (GSAP)
 
-| Trigger | Animation |
-|---------|-----------|
-| App load | Grid fades in, hero sigil blooms, wordmark tracks in |
+| Trigger                     | Animation                                            |
+| --------------------------- | ---------------------------------------------------- |
+| App load                    | Grid fades in, hero sigil blooms, wordmark tracks in |
 | Landing carousel scroll/key | Active card expands, others compress — spring easing |
-| Enter project route | Sidebar slides in left, content fades+translates up |
-| Exit project route | Reverse of entry |
-| Hover project card | Border brightens, faint red glow intensifies |
-| Hover sidebar icon | Icon scales up, label slides in |
+| Enter project route         | Sidebar slides in left, content fades+translates up  |
+| Exit project route          | Reverse of entry                                     |
+| Hover project card          | Border brightens, faint red glow intensifies         |
+| Hover sidebar icon          | Icon scales up, label slides in                      |
 
 All timelines defined in a central `animations.ts` to keep components clean.
 

@@ -1,0 +1,341 @@
+<h2>Animation & Visual Direction</h2>
+<p class="subtitle">
+	Which aesthetic best matches your vision for "futuristic + heavy animations"?
+</p>
+
+<div class="cards">
+	<div class="card" data-choice="cyber" onclick="toggleSelect(this)">
+		<div
+			class="card-image"
+			style="
+				background: #0a0a0a;
+				padding: 20px;
+				height: 160px;
+				position: relative;
+				overflow: hidden;
+				border-bottom: 1px solid #333;
+			"
+		>
+			<!-- Cyber / Neon Grid -->
+			<div
+				style="
+					position: absolute;
+					inset: 0;
+					background:
+						repeating-linear-gradient(
+							0deg,
+							transparent,
+							transparent 30px,
+							rgba(180, 0, 0, 0.15) 30px,
+							rgba(180, 0, 0, 0.15) 31px
+						),
+						repeating-linear-gradient(
+							90deg,
+							transparent,
+							transparent 30px,
+							rgba(180, 0, 0, 0.15) 30px,
+							rgba(180, 0, 0, 0.15) 31px
+						);
+				"
+			></div>
+			<div
+				style="
+					position: absolute;
+					bottom: 0;
+					left: 0;
+					right: 0;
+					height: 2px;
+					background: linear-gradient(90deg, transparent, #cc0000, #ffd700, #cc0000, transparent);
+					animation: scan 2s linear infinite;
+				"
+			></div>
+			<div
+				style="
+					position: relative;
+					z-index: 1;
+					font-family: monospace;
+					color: #ffd700;
+					font-size: 11px;
+					line-height: 1.8;
+					text-shadow: 0 0 8px #ffd700;
+				"
+			>
+				<div
+					style="color: #cc0000; font-size: 13px; font-weight: bold; text-shadow: 0 0 12px #cc0000"
+				>
+					◈ PROJECT_ALPHA
+				</div>
+				<div>STATUS: <span style="color: #00ff88">ACTIVE</span></div>
+				<div>RENDER: <span style="color: #ffd700">████████░░</span> 82%</div>
+				<div style="color: #666">▸ initialising modules...</div>
+			</div>
+			<style>
+				@keyframes scan {
+					0% {
+						transform: translateX(-100%);
+					}
+					100% {
+						transform: translateX(100%);
+					}
+				}
+			</style>
+		</div>
+		<div class="card-body">
+			<h3>A — Cyber / Neon Grid</h3>
+			<p>
+				Scanlines, glowing grid lines, neon text glow, HUD/terminal aesthetic. Dark red + gold as
+				neon colours. Think Tron meets military UI.
+			</p>
+		</div>
+	</div>
+
+	<div class="card" data-choice="particle" onclick="toggleSelect(this)">
+		<div
+			class="card-image"
+			style="
+				background: #050508;
+				padding: 20px;
+				height: 160px;
+				position: relative;
+				overflow: hidden;
+				border-bottom: 1px solid #333;
+			"
+		>
+			<!-- Particle / Space -->
+			<canvas id="c" style="position: absolute; inset: 0; width: 100%; height: 100%"></canvas>
+			<div style="position: relative; z-index: 1; text-align: center; padding-top: 30px">
+				<div
+					style="
+						font-size: 22px;
+						font-weight: 900;
+						letter-spacing: 6px;
+						color: #fff;
+						text-shadow:
+							0 0 20px rgba(204, 0, 0, 0.8),
+							0 0 40px rgba(255, 215, 0, 0.4);
+					"
+				>
+					VISUALISER
+				</div>
+				<div
+					style="
+						height: 2px;
+						background: linear-gradient(
+							90deg,
+							transparent,
+							#cc0000 30%,
+							#ffd700 50%,
+							#cc0000 70%,
+							transparent
+						);
+						margin: 8px auto;
+						width: 80%;
+						box-shadow: 0 0 10px #cc0000;
+					"
+				></div>
+				<div style="font-size: 9px; letter-spacing: 4px; color: #888; font-family: monospace">
+					DESIGN INTELLIGENCE PLATFORM
+				</div>
+			</div>
+			<script>
+				const cv = document.getElementById('c');
+				if (cv) {
+					const ctx = cv.getContext('2d');
+					const pts = Array.from({ length: 40 }, () => ({
+						x: Math.random() * 300,
+						y: Math.random() * 160,
+						vx: (Math.random() - 0.5) * 0.3,
+						vy: (Math.random() - 0.5) * 0.3,
+						r: Math.random() * 1.5 + 0.5
+					}));
+					cv.width = 300;
+					cv.height = 160;
+					function draw() {
+						ctx.fillStyle = 'rgba(5,5,8,0.2)';
+						ctx.fillRect(0, 0, 300, 160);
+						pts.forEach((p) => {
+							p.x += p.vx;
+							p.y += p.vy;
+							if (p.x < 0 || p.x > 300) p.vx *= -1;
+							if (p.y < 0 || p.y > 160) p.vy *= -1;
+							ctx.beginPath();
+							ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+							ctx.fillStyle = Math.random() > 0.5 ? 'rgba(204,0,0,0.8)' : 'rgba(255,215,0,0.6)';
+							ctx.fill();
+						});
+					}
+					setInterval(draw, 50);
+				}
+			</script>
+		</div>
+		<div class="card-body">
+			<h3>B — Particle / Cosmic</h3>
+			<p>
+				Floating particles, deep space backdrop, smooth morphing shapes. Transitions feel like
+				matter assembling. Ethereal and expansive.
+			</p>
+		</div>
+	</div>
+
+	<div class="card" data-choice="glassmorphism" onclick="toggleSelect(this)">
+		<div
+			class="card-image"
+			style="
+				background: linear-gradient(135deg, #1a0005 0%, #0d0d0d 50%, #1a1200 100%);
+				padding: 20px;
+				height: 160px;
+				position: relative;
+				overflow: hidden;
+				border-bottom: 1px solid #333;
+			"
+		>
+			<!-- Glass / Luxury -->
+			<div
+				style="
+					position: absolute;
+					top: -40px;
+					right: -40px;
+					width: 120px;
+					height: 120px;
+					background: radial-gradient(circle, rgba(204, 0, 0, 0.3), transparent);
+					border-radius: 50%;
+					filter: blur(20px);
+				"
+			></div>
+			<div
+				style="
+					position: absolute;
+					bottom: -30px;
+					left: 20px;
+					width: 100px;
+					height: 100px;
+					background: radial-gradient(circle, rgba(255, 215, 0, 0.2), transparent);
+					border-radius: 50%;
+					filter: blur(15px);
+				"
+			></div>
+			<div
+				style="
+					position: relative;
+					z-index: 1;
+					background: rgba(255, 255, 255, 0.04);
+					backdrop-filter: blur(10px);
+					border: 1px solid rgba(255, 215, 0, 0.2);
+					border-radius: 8px;
+					padding: 12px;
+					margin-top: 10px;
+				"
+			>
+				<div
+					style="
+						font-size: 11px;
+						letter-spacing: 2px;
+						color: #ffd700;
+						font-family: monospace;
+						margin-bottom: 6px;
+					"
+				>
+					◆ PROJECT ATLAS
+				</div>
+				<div style="font-size: 9px; color: #999; line-height: 1.6">
+					Color System · Typography · Spacing
+				</div>
+				<div style="display: flex; gap: 6px; margin-top: 8px">
+					<div
+						style="
+							flex: 1;
+							height: 4px;
+							background: linear-gradient(90deg, #cc0000, #ffd700);
+							border-radius: 2px;
+						"
+					></div>
+					<div
+						style="flex: 0.6; height: 4px; background: rgba(255, 215, 0, 0.3); border-radius: 2px"
+					></div>
+				</div>
+			</div>
+		</div>
+		<div class="card-body">
+			<h3>C — Glass / Dark Luxury</h3>
+			<p>
+				Glassmorphism panels, ambient glow orbs, smooth reveal animations. Dark red + gold as
+				premium accent gradients. Sleek and editorial.
+			</p>
+		</div>
+	</div>
+
+	<div class="card" data-choice="hybrid" onclick="toggleSelect(this)">
+		<div
+			class="card-image"
+			style="
+				background: #080808;
+				padding: 16px;
+				height: 160px;
+				position: relative;
+				overflow: hidden;
+				border-bottom: 1px solid #333;
+			"
+		>
+			<!-- Hybrid -->
+			<div
+				style="
+					position: absolute;
+					inset: 0;
+					background: repeating-linear-gradient(
+						0deg,
+						transparent,
+						transparent 40px,
+						rgba(255, 215, 0, 0.03) 40px,
+						rgba(255, 215, 0, 0.03) 41px
+					);
+				"
+			></div>
+			<div
+				style="
+					position: absolute;
+					top: 10px;
+					right: 10px;
+					width: 60px;
+					height: 60px;
+					background: radial-gradient(circle, rgba(204, 0, 0, 0.4), transparent);
+					border-radius: 50%;
+					filter: blur(12px);
+				"
+			></div>
+			<div style="position: relative; z-index: 1">
+				<div style="font-family: monospace; font-size: 10px; color: #444; margin-bottom: 8px">
+					SYS://VISUALISER/v2.0
+				</div>
+				<div
+					style="
+						background: rgba(255, 255, 255, 0.03);
+						border: 1px solid rgba(204, 0, 0, 0.3);
+						border-radius: 4px;
+						padding: 10px;
+					"
+				>
+					<div style="font-size: 13px; font-weight: 700; color: #fff; letter-spacing: 2px">
+						DESIGN MATRIX
+					</div>
+					<div
+						style="
+							height: 1px;
+							background: linear-gradient(90deg, #cc0000, transparent);
+							margin: 6px 0;
+						"
+					></div>
+					<div style="font-size: 9px; color: #ffd700; font-family: monospace; opacity: 0.8">
+						▸ grid overlay + glass panels + particles
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="card-body">
+			<h3>D — Hybrid (All Three)</h3>
+			<p>
+				Grid underlays + glass panels for content + particles on hero sections. Best of all styles,
+				used contextually. Most complex but most impressive.
+			</p>
+		</div>
+	</div>
+</div>

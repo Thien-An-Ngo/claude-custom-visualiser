@@ -1,0 +1,448 @@
+<h2>App Shell Layout</h2>
+<p class="subtitle">How the chrome wraps every project route — pick the navigation pattern</p>
+
+<div class="cards">
+	<div class="card" data-choice="sidebar" onclick="toggleSelect(this)">
+		<div
+			class="card-image"
+			style="
+				background: #070707;
+				height: 240px;
+				position: relative;
+				overflow: hidden;
+				border-bottom: 1px solid #1a1a1a;
+				font-family: monospace;
+				display: flex;
+			"
+		>
+			<!-- Sidebar -->
+			<div
+				style="
+					width: 52px;
+					background: #0a0a0a;
+					border-right: 1px solid rgba(130, 20, 0, 0.35);
+					display: flex;
+					flex-direction: column;
+					align-items: center;
+					padding: 10px 0;
+					gap: 8px;
+					box-shadow: 2px 0 12px rgba(130, 20, 0, 0.08);
+				"
+			>
+				<div
+					style="
+						width: 24px;
+						height: 24px;
+						border: 1px solid #821400;
+						box-shadow: 0 0 6px rgba(130, 20, 0, 0.5);
+						display: flex;
+						align-items: center;
+						justify-content: center;
+						font-size: 9px;
+						color: #821400;
+						margin-bottom: 8px;
+					"
+				>
+					◈
+				</div>
+				<div
+					style="
+						width: 28px;
+						height: 28px;
+						border: 1px solid rgba(130, 20, 0, 0.4);
+						border-radius: 2px;
+						display: flex;
+						align-items: center;
+						justify-content: center;
+						font-size: 8px;
+						color: #e6b820;
+						box-shadow: 0 0 5px rgba(230, 184, 32, 0.3);
+					"
+				>
+					01
+				</div>
+				<div
+					style="
+						width: 28px;
+						height: 28px;
+						border: 1px solid #1e1e1e;
+						border-radius: 2px;
+						display: flex;
+						align-items: center;
+						justify-content: center;
+						font-size: 8px;
+						color: #444;
+					"
+				>
+					02
+				</div>
+				<div
+					style="
+						width: 28px;
+						height: 28px;
+						border: 1px solid #1e1e1e;
+						border-radius: 2px;
+						display: flex;
+						align-items: center;
+						justify-content: center;
+						font-size: 8px;
+						color: #444;
+					"
+				>
+					03
+				</div>
+				<div
+					style="margin-top: auto; width: 28px; height: 1px; background: rgba(130, 20, 0, 0.3)"
+				></div>
+				<div
+					style="
+						width: 28px;
+						height: 28px;
+						border: 1px solid #1e1e1e;
+						border-radius: 2px;
+						display: flex;
+						align-items: center;
+						justify-content: center;
+						font-size: 8px;
+						color: #333;
+					"
+				>
+					⚙
+				</div>
+			</div>
+
+			<!-- Main area -->
+			<div style="flex: 1; display: flex; flex-direction: column">
+				<!-- Topbar inside main -->
+				<div
+					style="
+						height: 28px;
+						border-bottom: 1px solid #111;
+						display: flex;
+						align-items: center;
+						padding: 0 10px;
+						gap: 6px;
+					"
+				>
+					<div
+						style="
+							font-size: 8px;
+							letter-spacing: 2px;
+							color: #821400;
+							text-shadow: 0 0 6px rgba(130, 20, 0, 0.8);
+						"
+					>
+						PROJECT // DESIGN-SYSTEM
+					</div>
+					<div
+						style="margin-left: auto; font-size: 8px; color: #e6b820; text-shadow: 0 0 5px #e6b820"
+					>
+						◆ ACTIVE
+					</div>
+				</div>
+				<!-- Content -->
+				<div
+					style="
+						flex: 1;
+						padding: 10px;
+						background: repeating-linear-gradient(
+							0deg,
+							transparent,
+							transparent 20px,
+							rgba(130, 20, 0, 0.04) 20px,
+							rgba(130, 20, 0, 0.04) 21px
+						);
+					"
+				>
+					<div
+						style="
+							background: rgba(12, 12, 12, 0.9);
+							border: 1px solid rgba(130, 20, 0, 0.3);
+							border-radius: 3px;
+							padding: 8px;
+							box-shadow: 0 0 14px rgba(130, 20, 0, 0.12);
+						"
+					>
+						<div style="font-size: 8px; color: #666; margin-bottom: 6px; letter-spacing: 1px">
+							VISUALISATION FRAME
+						</div>
+						<div
+							style="
+								height: 60px;
+								border: 1px dashed #1e1e1e;
+								display: flex;
+								align-items: center;
+								justify-content: center;
+							"
+						>
+							<span style="font-size: 8px; color: #333">content renders here</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="card-body">
+			<h3>A — Icon Sidebar</h3>
+			<p>
+				Narrow icon rail on the left. Each project gets a numbered slot. Expands to show labels on
+				hover. Maximises content space, works well for 10+ projects.
+			</p>
+		</div>
+	</div>
+
+	<div class="card" data-choice="topnav" onclick="toggleSelect(this)">
+		<div
+			class="card-image"
+			style="
+				background: #070707;
+				height: 240px;
+				position: relative;
+				overflow: hidden;
+				border-bottom: 1px solid #1a1a1a;
+				font-family: monospace;
+				display: flex;
+				flex-direction: column;
+			"
+		>
+			<!-- Topnav -->
+			<div
+				style="
+					height: 36px;
+					background: #0a0a0a;
+					border-bottom: 1px solid rgba(130, 20, 0, 0.35);
+					display: flex;
+					align-items: center;
+					padding: 0 12px;
+					gap: 12px;
+					box-shadow: 0 2px 12px rgba(130, 20, 0, 0.08);
+				"
+			>
+				<div
+					style="
+						font-size: 9px;
+						letter-spacing: 2px;
+						color: #821400;
+						text-shadow: 0 0 8px rgba(130, 20, 0, 0.8);
+						margin-right: 8px;
+					"
+				>
+					◈ VISUALISER
+				</div>
+				<div
+					style="
+						font-size: 8px;
+						color: #e6b820;
+						text-shadow: 0 0 5px #e6b820;
+						border-bottom: 1px solid #e6b820;
+						padding-bottom: 1px;
+					"
+				>
+					DESIGN-SYS
+				</div>
+				<div style="font-size: 8px; color: #444">TYPOGRAPHY</div>
+				<div style="font-size: 8px; color: #444">LAYOUT</div>
+				<div style="margin-left: auto; font-size: 8px; color: #333">◆ v2.1</div>
+			</div>
+
+			<!-- Grid underlay + content -->
+			<div
+				style="
+					flex: 1;
+					padding: 10px;
+					background:
+						repeating-linear-gradient(
+							0deg,
+							transparent,
+							transparent 20px,
+							rgba(130, 20, 0, 0.04) 20px,
+							rgba(130, 20, 0, 0.04) 21px
+						),
+						repeating-linear-gradient(
+							90deg,
+							transparent,
+							transparent 20px,
+							rgba(130, 20, 0, 0.04) 20px,
+							rgba(130, 20, 0, 0.04) 21px
+						);
+				"
+			>
+				<div
+					style="
+						background: rgba(12, 12, 12, 0.9);
+						border: 1px solid rgba(130, 20, 0, 0.3);
+						border-radius: 3px;
+						padding: 8px;
+						box-shadow: 0 0 14px rgba(130, 20, 0, 0.12);
+					"
+				>
+					<div style="font-size: 8px; color: #666; margin-bottom: 6px; letter-spacing: 1px">
+						VISUALISATION FRAME
+					</div>
+					<div
+						style="
+							height: 80px;
+							border: 1px dashed #1e1e1e;
+							display: flex;
+							align-items: center;
+							justify-content: center;
+						"
+					>
+						<span style="font-size: 8px; color: #333">content renders here</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="card-body">
+			<h3>B — Top Navigation Bar</h3>
+			<p>
+				Horizontal project tabs across the top. Familiar, scannable. Best for fewer projects
+				(&lt;8). Full width for content below.
+			</p>
+		</div>
+	</div>
+
+	<div class="card" data-choice="sidebar-expanded" onclick="toggleSelect(this)">
+		<div
+			class="card-image"
+			style="
+				background: #070707;
+				height: 240px;
+				position: relative;
+				overflow: hidden;
+				border-bottom: 1px solid #1a1a1a;
+				font-family: monospace;
+				display: flex;
+			"
+		>
+			<!-- Expanded Sidebar -->
+			<div
+				style="
+					width: 110px;
+					background: #0a0a0a;
+					border-right: 1px solid rgba(130, 20, 0, 0.35);
+					display: flex;
+					flex-direction: column;
+					padding: 10px 8px;
+					gap: 4px;
+					box-shadow: 2px 0 12px rgba(130, 20, 0, 0.08);
+				"
+			>
+				<div
+					style="
+						font-size: 8px;
+						letter-spacing: 2px;
+						color: #821400;
+						text-shadow: 0 0 6px rgba(130, 20, 0, 0.8);
+						margin-bottom: 10px;
+						padding-left: 2px;
+					"
+				>
+					◈ VISUALISER
+				</div>
+				<div
+					style="
+						padding: 5px 6px;
+						border: 1px solid rgba(130, 20, 0, 0.5);
+						border-radius: 2px;
+						background: rgba(130, 20, 0, 0.06);
+						box-shadow: 0 0 6px rgba(130, 20, 0, 0.12);
+					"
+				>
+					<div
+						style="
+							font-size: 7px;
+							color: #e6b820;
+							text-shadow: 0 0 5px #e6b820;
+							letter-spacing: 1px;
+						"
+					>
+						01 — ACTIVE
+					</div>
+					<div style="font-size: 8px; color: #ccc; margin-top: 1px">Design System</div>
+				</div>
+				<div style="padding: 5px 6px; border: 1px solid #1a1a1a; border-radius: 2px">
+					<div style="font-size: 7px; color: #444; letter-spacing: 1px">02</div>
+					<div style="font-size: 8px; color: #555; margin-top: 1px">Typography</div>
+				</div>
+				<div style="padding: 5px 6px; border: 1px solid #1a1a1a; border-radius: 2px">
+					<div style="font-size: 7px; color: #444; letter-spacing: 1px">03</div>
+					<div style="font-size: 8px; color: #555; margin-top: 1px">Layout Grid</div>
+				</div>
+				<div style="margin-top: auto; padding-top: 8px; border-top: 1px solid #1a1a1a">
+					<div style="font-size: 7px; color: #333; letter-spacing: 1px">SETTINGS</div>
+				</div>
+			</div>
+
+			<!-- Main area -->
+			<div style="flex: 1; display: flex; flex-direction: column">
+				<div
+					style="
+						height: 28px;
+						border-bottom: 1px solid #111;
+						display: flex;
+						align-items: center;
+						padding: 0 10px;
+					"
+				>
+					<div
+						style="
+							font-size: 8px;
+							letter-spacing: 2px;
+							color: #821400;
+							text-shadow: 0 0 6px rgba(130, 20, 0, 0.8);
+						"
+					>
+						DESIGN SYSTEM
+					</div>
+					<div
+						style="margin-left: auto; font-size: 8px; color: #e6b820; text-shadow: 0 0 5px #e6b820"
+					>
+						◆
+					</div>
+				</div>
+				<div
+					style="
+						flex: 1;
+						padding: 10px;
+						background: repeating-linear-gradient(
+							0deg,
+							transparent,
+							transparent 20px,
+							rgba(130, 20, 0, 0.04) 20px,
+							rgba(130, 20, 0, 0.04) 21px
+						);
+					"
+				>
+					<div
+						style="
+							background: rgba(12, 12, 12, 0.9);
+							border: 1px solid rgba(130, 20, 0, 0.3);
+							border-radius: 3px;
+							padding: 8px;
+							box-shadow: 0 0 14px rgba(130, 20, 0, 0.12);
+						"
+					>
+						<div
+							style="
+								height: 60px;
+								border: 1px dashed #1e1e1e;
+								display: flex;
+								align-items: center;
+								justify-content: center;
+							"
+						>
+							<span style="font-size: 8px; color: #333">content renders here</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="card-body">
+			<h3>C — Expanded Sidebar</h3>
+			<p>
+				Full sidebar with project names + numbers visible always. More spatial but gives each
+				project a permanent presence. Best for a curated showcase feel.
+			</p>
+		</div>
+	</div>
+</div>

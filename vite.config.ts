@@ -3,10 +3,10 @@ import { sveltekit } from '@sveltejs/kit/vite';
 import { defineConfig } from 'vitest/config';
 
 export default defineConfig({
-  plugins: [tailwindcss(), sveltekit()],
-  test: {
-    include: ['src/**/*.{test,spec}.ts'],
-    environment: 'jsdom',
-    setupFiles: ['src/test-setup.ts'],
-  },
+	plugins: [tailwindcss(), sveltekit()],
+	test: {
+		include: ['src/**/*.{test,spec}.ts'],
+		environment: 'jsdom',
+		setupFiles: ['src/test-setup.ts']
+	}
 });
