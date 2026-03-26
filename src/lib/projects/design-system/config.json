@@ -1,0 +1,36 @@
+{
+	"slug": "design-system",
+	"title": "Design System",
+	"description": "Color palette, typography scale, and spacing tokens for a design recommendation.",
+	"tags": ["COLOR", "TYPE", "TOKENS"],
+	"status": "new",
+	"sections": [
+		{
+			"type": "colour-palette",
+			"data": {
+				"swatches": [
+					{ "name": "Background", "hex": "#070707", "token": "--color-bg" },
+					{ "name": "Surface", "hex": "#0a0a0a", "token": "--color-surface" },
+					{ "name": "Red", "hex": "#821400", "token": "--color-red", "glow": true },
+					{ "name": "Gold", "hex": "#e6b820", "token": "--color-gold", "glow": true },
+					{ "name": "Text", "hex": "#e8e8e8", "token": "--color-text" },
+					{ "name": "Muted", "hex": "#666666", "token": "--color-muted" }
+				]
+			}
+		},
+		{
+			"type": "type-scale",
+			"data": {
+				"fontFamily": "JetBrains Mono",
+				"steps": [
+					{ "name": "xs", "size": "10px", "tracking": "3px", "weight": 400, "sample": "SYSTEM LABEL" },
+					{ "name": "sm", "size": "12px", "tracking": "2px", "weight": 400, "sample": "Navigation item" },
+					{ "name": "base", "size": "14px", "tracking": "1px", "weight": 400, "sample": "Body copy reads here" },
+					{ "name": "lg", "size": "18px", "tracking": "2px", "weight": 700, "sample": "Card Title" },
+					{ "name": "xl", "size": "24px", "tracking": "3px", "weight": 900, "sample": "SECTION HEADING" },
+					{ "name": "2xl", "size": "36px", "tracking": "4px", "weight": 900, "sample": "VISUALISER" }
+				]
+			}
+		}
+	]
+}
